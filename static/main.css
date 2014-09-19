@@ -1,0 +1,13 @@
+#digit {
+  border: 3px skyblue solid;
+}
+
+#recognize {
+  height: 100px;
+  width: 400px;
+  font-size: 50px;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: lightblue;
+  color: black;
+}

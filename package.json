@@ -1,0 +1,19 @@
+{
+  "name": "neural-js",
+  "version": "0.0.1",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.8.2",
+    "brain": "^0.7.0",
+    "convnetjs": "^0.3.0",
+    "express": "^4.9.3",
+    "gm": "^1.16.0",
+    "pngjs": "^0.4.0"
+  }
+}
