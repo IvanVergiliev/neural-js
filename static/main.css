@@ -1,13 +1,47 @@
+* {
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0px;
+}
+
+.recognizer {
+  padding-top: 5px;
+  width: 320px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .recognizer .drawingArea {
   border: 3px skyblue solid;
 }
 
+.recognizer button {
+  margin: 0px 5px;
+  height: 45px;
+  width: 120px;
+  box-shadow: none;
+  border-radius: 7px;
+  border: 1px solid transparent;
+  font-size: 18px;
+  padding: 0px 16px;
+}
+
+.recognizer .buttonBar {
+  margin-top: 10px;
+}
+
 .recognizer .recognize {
-  height: 100px;
-  width: 400px;
-  font-size: 50px;
-  font-weight: bold;
-  border-radius: 5px;
-  background-color: lightblue;
-  color: black;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+  color: white;
+}
+
+.recognizer .clear {
+  background-color: #fff;
+  border-color: #ccc;
+  color: #333;
 }

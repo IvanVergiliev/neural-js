@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "autoprefixer": "^3.1.0",
     "body-parser": "^1.8.2",
     "brain": "^0.7.0",
     "convnetjs": "^0.3.0",

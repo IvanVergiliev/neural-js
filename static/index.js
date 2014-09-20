@@ -21,14 +21,21 @@ var DigitRecognizer = React.createClass({
     var dataUrl = this.refs.drawingArea.getDOMNode().toDataURL();
     $.post('/recognize', {image: dataUrl});
   },
+  clearDrawing: function () {
+    var drawingArea = this.refs.drawingArea.getDOMNode();
+    var context = drawingArea.getContext('2d');
+    context.clearRect(0, 0, drawingArea.width, drawingArea.height);
+  },
   render: function () {
     return (
       <div className='recognizer'>
-        <canvas className='drawingArea' ref='drawingArea' width={600} height={600} onTouchStart={this.drawTouchEvent} onTouchMove={this.drawTouchEvent}></canvas>
-        <br />
-        <button className='recognize' ref='submit' onClick={this.recognize}>Recognize</button>
+        <canvas className='drawingArea' ref='drawingArea' width={300} height={300} onTouchStart={this.drawTouchEvent} onTouchMove={this.drawTouchEvent}></canvas>
+        <div className='buttonBar'>
+          <button className='recognize' ref='submit' onClick={this.recognize}>Recognize</button>
+          <button className='clear' onClick={this.clearDrawing}>Clear</button>
+        </div>
       </div>
-    )
+    );
   }
 });
 
