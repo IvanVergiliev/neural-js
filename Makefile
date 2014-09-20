@@ -4,7 +4,7 @@ DATA_FILES=data/train-images-idx3-ubyte data/train-labels-idx1-ubyte
 all: $(DATA_FILES) static/main.prefixed.css
 
 $(DATA_FILES): | data
-	curl --compressed http://yann.lecun.com/exdb/mnist/$(@F).gz > $@
+	curl http://yann.lecun.com/exdb/mnist/$(@F).gz | gunzip > $@
 
 data:
 	mkdir -p $@
