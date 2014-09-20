@@ -13,6 +13,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 .recognizer .drawingArea {
@@ -34,7 +35,7 @@ body {
   margin-top: 10px;
 }
 
-.recognizer .recognize {
+.recognizer .recognize, .recognizer .correct {
   background-color: #5cb85c;
   border-color: #4cae4c;
   color: white;
@@ -44,4 +45,35 @@ body {
   background-color: #fff;
   border-color: #ccc;
   color: #333;
+}
+
+.recognizer .overlay {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  left: 0px;
+  right: 0px;
+  font-size: 55px;
+  font-weight: bolder;
+  background-color: rgba(221, 221, 221, 0.5);
+  border-radius: 7px;
+}
+
+.recognizer .message {
+  font-size: 45px;
+}
+
+.recognizer .result {
+  font-size: 160px;
+}
+
+.recognizer .wrong {
+  background-color: red;
+  border-color: #900;
+  color: white;
 }

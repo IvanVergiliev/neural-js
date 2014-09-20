@@ -6,7 +6,7 @@ var convnetjs = require('convnetjs');
 var dataFileBuffer  = fs.readFileSync(path.join(__dirname, '/data/train-images-idx3-ubyte'));
 var labelFileBuffer = fs.readFileSync(path.join(__dirname, '/data/train-labels-idx1-ubyte'));
 
-var TRAINING_IMAGE_COUNT = 600;
+var TRAINING_IMAGE_COUNT = 60000;
 var IMAGE_SIZE = exports.IMAGE_SIZE = 28;
 var DATA_OFFSET = 16;
 var LABEL_OFFSET = 8;

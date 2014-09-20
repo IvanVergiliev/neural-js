@@ -1,7 +1,7 @@
 /* eslint-env node */
 var convnetjs = require('convnetjs');
 var convNet = require('./convNet');
-var path = require('path')
+var path = require('path');
 
 var digits = convNet.parseTrainingData();
 var net = convNet.initNetwork();
@@ -20,19 +20,18 @@ app.use(express.static(path.join(__dirname, '/static')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/recognize', function (req, res) {
-  var dataUrl = req.body.image;
+var resizeAndParse = function (dataUrl, cb) {
   dataUrl = dataUrl.replace('data:image/png;base64,', '');
   var img = new Buffer(dataUrl, 'base64');
   gm(img).resize(28, 28).toBuffer('PNG', function (err, buffer) {
     if (err) {
-      console.error(err);
+      cb(err);
       return;
     }
     var png = new PNG();
     png.parse(buffer, function (err, image) {
       if (err) {
-        res.json({error: err});
+        cb(err);
         return;
       }
       for (var i = 0; i < image.height; ++i) {
@@ -48,12 +47,43 @@ app.post('/recognize', function (req, res) {
       }
       var vol = new convnetjs.Vol(convNet.IMAGE_SIZE, convNet.IMAGE_SIZE, 1);
       vol.w = input;
-      var recognitionResult = net.forward(vol);
-      for (var j = 0; j < 10; ++j) {
-        console.log(recognitionResult.w[j]);
-      }
-      res.end();
+      cb(null, vol);
     });
+  });
+};
+
+app.post('/recognize', function (req, res) {
+  var dataUrl = req.body.image;
+  resizeAndParse(dataUrl, function (err, input) {
+    if (err) {
+      res.json({error: err});
+      return;
+    }
+    var recognitionResult = net.forward(input);
+    var bestProb = -1;
+    var bestCandidate = -1;
+    for (var j = 0; j < 10; ++j) {
+      if (recognitionResult.w[j] > bestProb) {
+        bestProb = recognitionResult.w[j];
+        bestCandidate = j;
+      }
+      console.log(recognitionResult.w[j]);
+    }
+    res.json({result: bestCandidate});
+  });
+});
+
+app.post('/train', function (req, res) {
+  var dataUrl = req.body.image;
+  var label = req.body.label;
+  resizeAndParse(dataUrl, function (err, input) {
+    if (err) {
+      res.json({error: err});
+      return;
+    }
+    res.end();
+    trainer.train(input, Number(label));
+    console.log('Added a training example for ' + label);
   });
 });
 
