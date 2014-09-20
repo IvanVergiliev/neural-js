@@ -1,10 +1,11 @@
-$(function () {
-  var c = document.getElementById('digit');
-  // c.width = c.width * 2;
-  // c.height = c.height * 2;
-  var context = c.getContext('2d');
+/** @jsx React.DOM */
 
-  var drawTouchEvent = function drawTouchEvent(event) {
+/* eslint-env browser */
+/* global $, React */
+
+var DigitRecognizer = React.createClass({
+  drawTouchEvent: function drawTouchEvent(event) {
+    var context = this.refs.drawingArea.getDOMNode().getContext('2d');
     for (var i = 0; i < event.targetTouches.length; ++i) {
       var touch = event.targetTouches[i];
       context.save();
@@ -15,13 +16,21 @@ $(function () {
     }
     event.preventDefault();
     return false;
-  };
-
-  c.addEventListener('touchstart', drawTouchEvent);
-  c.addEventListener('touchmove', drawTouchEvent);
-
-  $('#recognize').on('touchend', function () {
-    var dataUrl = c.toDataURL();
+  },
+  recognize: function () {
+    var dataUrl = this.refs.drawingArea.getDOMNode().toDataURL();
     $.post('/recognize', {image: dataUrl});
-  });
+  },
+  render: function () {
+    return (
+      <div className='recognizer'>
+        <canvas className='drawingArea' ref='drawingArea' width={600} height={600} onTouchStart={this.drawTouchEvent} onTouchMove={this.drawTouchEvent}></canvas>
+        <br />
+        <button className='recognize' ref='submit' onClick={this.recognize}>Recognize</button>
+      </div>
+    )
+  }
 });
+
+React.initializeTouchEvents(true);
+React.renderComponent(<DigitRecognizer />, document.getElementById('digitRecognizer'));

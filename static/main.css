@@ -1,8 +1,8 @@
-#digit {
+.recognizer .drawingArea {
   border: 3px skyblue solid;
 }
 
-#recognize {
+.recognizer .recognize {
   height: 100px;
   width: 400px;
   font-size: 50px;

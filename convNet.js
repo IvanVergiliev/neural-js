@@ -7,7 +7,7 @@ var dataFileBuffer  = fs.readFileSync(path.join(__dirname, '/data/train-images-i
 var labelFileBuffer = fs.readFileSync(path.join(__dirname, '/data/train-labels-idx1-ubyte'));
 
 var TRAINING_IMAGE_COUNT = 600;
-var IMAGE_SIZE = 28;
+var IMAGE_SIZE = exports.IMAGE_SIZE = 28;
 var DATA_OFFSET = 16;
 var LABEL_OFFSET = 8;
 

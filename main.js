@@ -46,7 +46,7 @@ app.post('/recognize', function (req, res) {
       for (var i = 3; i < image.width * image.height * 4; i += 4) {
         input.push(image.data[i]);
       }
-      var vol = new convnetjs.Vol(IMAGE_SIZE, IMAGE_SIZE, 1);
+      var vol = new convnetjs.Vol(convNet.IMAGE_SIZE, convNet.IMAGE_SIZE, 1);
       vol.w = input;
       var recognitionResult = net.forward(vol);
       for (var j = 0; j < 10; ++j) {
