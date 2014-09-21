@@ -4,9 +4,10 @@ neural-js
 Handwritten digit recognition in JavaScript using Convolutional Neural Networks
 
 To install and run the server:
+
     git clone git@github.com:IvanVergiliev/neural-js.git
     cd neural-js
-    # Install GraphicsMagick (http://www.graphicsmagick.org). On OS X, you can do 'brew install gm', if you're using brew.
+    # Install GraphicsMagick (http://www.graphicsmagick.org). On OS X, you can do 'brew install gm' if you're using brew.
     npm install
     make
     node main.js
